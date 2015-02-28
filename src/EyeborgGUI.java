@@ -7,7 +7,7 @@ import java.io.*;
 
 public class EyeborgGUI extends JFrame {
 	
-	private String[] mappings = { "Harbisson", "Newton", "Castel", "Field", "Jameson", "Semann", "Rimington", "Bishop", "Helmholtz", "Scriabin", "Klein", "Aeppli", "Belmont", "Zieverink" };
+	//private String[] mappings = { "Harbisson", "Newton", "Castel", "Field", "Jameson", "Semann", "Rimington", "Bishop", "Helmholtz", "Scriabin", "Klein", "Aeppli", "Belmont", "Zieverink" };
 	
 	public EyeborgGUI() {
 		createGUI();
@@ -16,40 +16,91 @@ public class EyeborgGUI extends JFrame {
 	private void createGUI() {
 		setTitle("Eyeborg");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setLayout(new FlowLayout());
+		setLayout(new BorderLayout());
 		
 		JPanel imagePanel = new JPanel(); // Will hold the primary image
-		JPanel controlPanel = new JPanel();
+		JPanel infoPanel = createInfoPanel();
 		
 		imagePanel.setPreferredSize(new Dimension(1100,700));
 		imagePanel.setLayout(new FlowLayout());
 		imagePanel.add(new ImageLabel("resource/SchoolOfAthens.jpg"));
 		
-		controlPanel.setPreferredSize(new Dimension(200, 700));
-		controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.PAGE_AXIS));
+		//infoPanel.setPreferredSize(new Dimension(200, 700));
+		infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.LINE_AXIS));
 		
-		JLabel dominantColorLabel = new JLabel("Dominant Color");
-		JPanel dominantColorPanel = new JPanel();
-		//dominantColorPanel.setPreferredSize(new Dimension(controlPanel.WIDTH - 10, 50));
-		dominantColorPanel.setMaximumSize(new Dimension(50, 50));
-		dominantColorPanel.setBackground(Color.GRAY);
 		
-		JComboBox mappingBox = new JComboBox(mappings);
-		mappingBox.setMaximumSize(new Dimension(controlPanel.WIDTH - 10, 10));
-		
-		controlPanel.add(dominantColorLabel);
-		controlPanel.add(dominantColorPanel);
-		controlPanel.add(mappingBox);
+		//JComboBox mappingBox = new JComboBox(mappings);
+		//mappingBox.setMaximumSize(new Dimension(controlPanel.WIDTH - 10, 10));
+		//controlPanel.add(mappingBox);
 		
 		//imagePanel.setBackground(Color.DARK_GRAY);
 		//controlPanel.setBackground(Color.GRAY);
-		add(imagePanel);
-		add(controlPanel);
+		add(imagePanel, BorderLayout.CENTER);
+		add(infoPanel, BorderLayout.PAGE_END);
 		
-		setSize(imagePanel.WIDTH + 200, imagePanel.HEIGHT);
+		infoPanel.setBackground(Color.RED);
+		setSize(imagePanel.WIDTH, imagePanel.HEIGHT + 200);
 		setVisible(true);
 		
 		pack();
 	}
+	
+	
+	private JPanel createInfoPanel() {
+		JPanel controlPanel = new JPanel();
+		
+		controlPanel.setLayout(new BorderLayout());
+
+		JPanel dominantColorPanel = createDominantColorPanel();
+		JPanel subImagePanel = createSubImagePanel(controlPanel);
+		
+		controlPanel.add(dominantColorPanel, BorderLayout.LINE_START);
+		controlPanel.add(subImagePanel, BorderLayout.CENTER);
+		
+		return controlPanel;
+	}
+	
+	// Create dominant color panel and components
+	private JPanel createDominantColorPanel() {
+		JPanel dominantColorPanel = new JPanel();
+		dominantColorPanel.setLayout(new BoxLayout(dominantColorPanel, BoxLayout.PAGE_AXIS));
+		
+		JLabel dominantColorTitleLabel = new JLabel("Dominant Color");
+		JLabel dominantColorLabel = new JLabel();
+		
+		dominantColorLabel.setBounds(10, 10, 100, 100);
+		
+		dominantColorLabel.setMinimumSize(new Dimension(100, 100));
+		dominantColorLabel.setPreferredSize(new Dimension(100, 100));
+		dominantColorLabel.setMaximumSize(new Dimension(100, 100));
+		
+		dominantColorPanel.add(dominantColorTitleLabel);
+		dominantColorPanel.add(dominantColorLabel);
+		
+		dominantColorPanel.setBackground(Color.GRAY);
+		return dominantColorPanel;
+	}
+	
+	private JPanel createSubImagePanel(JPanel parent) {
+		int parentHeight = parent.getHeight();
+		int parentWidth = parent.getWidth();
+		
+		JPanel subImagePanel = new JPanel();
+		subImagePanel.setLayout(new BoxLayout(subImagePanel, BoxLayout.PAGE_AXIS));
+		
+		JLabel subImageTitleLabel = new JLabel("Subimage");
+		JLabel subImageLabel = new JLabel();
+		
+		subImageLabel.setMinimumSize(new Dimension(100, 100));
+		subImageLabel.setPreferredSize(new Dimension(100, 100));
+		subImageLabel.setMaximumSize(new Dimension(100, 100));
+		
+		subImagePanel.add(subImageTitleLabel);
+		subImagePanel.add(subImageLabel);
+		
+		subImagePanel.setBackground(Color.DARK_GRAY);
+		return subImagePanel;
+	}
+	
 
 }

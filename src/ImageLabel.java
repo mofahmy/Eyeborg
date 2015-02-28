@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 public class ImageLabel extends JLabel implements MouseListener, MouseMotionListener  {
 	
 	private BufferedImage img;
+	private BufferedImage subImg;
 	
 	public ImageLabel(String pathToImage) {
 		img = loadImage("resource/schoolOfAthens.jpg");
@@ -38,9 +39,13 @@ public class ImageLabel extends JLabel implements MouseListener, MouseMotionList
 		return img;
 	}
 	
+	public BufferedImage getCurrentSubImage() {
+		return subImg;
+	}
+	
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		 System.out.println("Mouse dragged (" + e.getX() + ',' + e.getY() + ')');
+		 //System.out.println("Mouse dragged (" + e.getX() + ',' + e.getY() + ')');
 		 
 		 int x = Math.max(e.getX() - 5, 0);
 		 int y = Math.max(e.getY() - 5, 0);
@@ -52,13 +57,13 @@ public class ImageLabel extends JLabel implements MouseListener, MouseMotionList
 		 int y2 = Math.min(e.getY() + 5, this.HEIGHT);
 		 
 		 
-		 BufferedImage subImg = img.getSubimage(x, y, w, h);
+		 subImg = img.getSubimage(x, y, w, h);
 		 ColorDetector.getDominantColor(subImg);
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		System.out.println("Mouse moved (" + e.getX() + ',' + e.getY() + ')');
+		//System.out.println("Mouse moved (" + e.getX() + ',' + e.getY() + ')');
 	}
 
 	@Override

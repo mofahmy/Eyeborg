@@ -16,16 +16,29 @@ public class ColorDetector {
 				// Retrieves RGBA color components of a pixel as a TYPE_INT_ARGB
 				int pixel = img.getRGB(x, y);
 				
-				// Extract red, green, blue values from TYPE_INT_ARGB pixel
-				int r = (pixel >> 16) & 0xff;
-			    int g = (pixel >> 8) & 0xff;
-			    int b = (pixel) & 0xff;
-			    
-			    Color c = new Color(r,g,b);
-			    System.out.println("Pixel (" + x + "," + y + ") - Color: " + c.toString());
+				int[] rgb = getRGB(pixel);
+				
+			    //System.out.println("Pixel (" + x + "," + y + ") - Color: " + c.toString());
 			}
 		}
 		
 		return dominant;
+	}
+	
+	// Extract red, green, blue values from TYPE_INT_ARGB pixel
+	public static int[] getRGB(int pixel) {
+		int r = (pixel >> 16) & 0xff;
+	    int g = (pixel >> 8) & 0xff;
+	    int b = (pixel) & 0xff;
+	    
+	    int[] rgb = { r, g, b};
+	    return rgb;
+	}
+	
+	// Given an array containing color RGB information, return the color's HSB information
+	private static float[] getHSB(Color c) {
+		float[] hsb = Color.RGBtoHSB(c.getRed(), c.getGreen(), c.getBlue(), null);
+		
+		return hsb;
 	}
 }
