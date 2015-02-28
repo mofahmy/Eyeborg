@@ -18,7 +18,7 @@ public class ImageLabel extends JLabel implements MouseListener, MouseMotionList
 	private BufferedImage img;
 	
 	public ImageLabel(String pathToImage) {
-		img = loadImage("src/schoolOfAthens.jpg");
+		img = loadImage("resource/schoolOfAthens.jpg");
 		ImageIcon icon = new ImageIcon(img);
 		
 		this.setPreferredSize(new Dimension(img.getWidth(), img.getHeight()));
@@ -41,6 +41,19 @@ public class ImageLabel extends JLabel implements MouseListener, MouseMotionList
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		 System.out.println("Mouse dragged (" + e.getX() + ',' + e.getY() + ')');
+		 
+		 int x = Math.max(e.getX() - 5, 0);
+		 int y = Math.max(e.getY() - 5, 0);
+		 
+		 int w = (x + 5) < img.getWidth() ? 5 : img.getWidth() - x;
+		 int h = (y + 5) < img.getHeight() ? 5 : img.getHeight() - x;
+		 
+		 int x2 = Math.min(e.getX() + 5, this.WIDTH);
+		 int y2 = Math.min(e.getY() + 5, this.HEIGHT);
+		 
+		 
+		 BufferedImage subImg = img.getSubimage(x, y, w, h);
+		 ColorDetector.getDominantColor(subImg);
 	}
 
 	@Override
