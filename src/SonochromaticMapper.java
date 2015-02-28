@@ -1,10 +1,3 @@
-import java.awt.Color;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.HashMap;
-import java.util.Scanner;
-
-
 public class SonochromaticMapper {
 	
 	public static final float minFrequency = (float) 363.797; // Slightly below F#4

@@ -10,7 +10,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 
 public class ImageLabel extends JLabel implements MouseListener, MouseMotionListener  {
@@ -52,10 +51,6 @@ public class ImageLabel extends JLabel implements MouseListener, MouseMotionList
 		 
 		 int w = (x + 5) < img.getWidth() ? 5 : img.getWidth() - x;
 		 int h = (y + 5) < img.getHeight() ? 5 : img.getHeight() - x;
-		 
-		 int x2 = Math.min(e.getX() + 5, this.WIDTH);
-		 int y2 = Math.min(e.getY() + 5, this.HEIGHT);
-		 
 		 
 		 subImg = img.getSubimage(x, y, w, h);
 		 ColorDetector.getDominantColor(subImg);

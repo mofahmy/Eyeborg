@@ -1,9 +1,6 @@
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.*;
 
 public class EyeborgGUI extends JFrame {
 	
@@ -52,7 +49,7 @@ public class EyeborgGUI extends JFrame {
 		controlPanel.setLayout(new BorderLayout());
 
 		JPanel dominantColorPanel = createDominantColorPanel();
-		JPanel subImagePanel = createSubImagePanel(controlPanel);
+		JPanel subImagePanel = createSubImagePanel();
 		
 		controlPanel.add(dominantColorPanel, BorderLayout.LINE_START);
 		controlPanel.add(subImagePanel, BorderLayout.CENTER);
@@ -81,10 +78,7 @@ public class EyeborgGUI extends JFrame {
 		return dominantColorPanel;
 	}
 	
-	private JPanel createSubImagePanel(JPanel parent) {
-		int parentHeight = parent.getHeight();
-		int parentWidth = parent.getWidth();
-		
+	private JPanel createSubImagePanel() {
 		JPanel subImagePanel = new JPanel();
 		subImagePanel.setLayout(new BoxLayout(subImagePanel, BoxLayout.PAGE_AXIS));
 		
