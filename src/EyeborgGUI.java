@@ -4,7 +4,9 @@ import java.awt.*;
 
 public class EyeborgGUI extends JFrame {
 	
-	//private String[] mappings = { "Harbisson", "Newton", "Castel", "Field", "Jameson", "Semann", "Rimington", "Bishop", "Helmholtz", "Scriabin", "Klein", "Aeppli", "Belmont", "Zieverink" };
+	private JPanel imagePanel;
+	private JPanel infoPanel;
+	private JLabel infoLabel;
 	
 	public EyeborgGUI() {
 		createGUI();
@@ -15,27 +17,16 @@ public class EyeborgGUI extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
 		
-		JPanel imagePanel = new JPanel(); // Will hold the primary image
-		JPanel infoPanel = createInfoPanel();
+		imagePanel = new JPanel(); // Will hold the primary image
+		infoPanel = createInfoPanel();
 		
 		imagePanel.setPreferredSize(new Dimension(1100,700));
 		imagePanel.setLayout(new FlowLayout());
-		imagePanel.add(new ImageLabel("resource/SchoolOfAthens.jpg"));
+		imagePanel.add(new ImageLabel("resource/SchoolOfAthens.jpg", this));
 		
-		//infoPanel.setPreferredSize(new Dimension(200, 700));
-		infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.LINE_AXIS));
-		
-		
-		//JComboBox mappingBox = new JComboBox(mappings);
-		//mappingBox.setMaximumSize(new Dimension(controlPanel.WIDTH - 10, 10));
-		//controlPanel.add(mappingBox);
-		
-		//imagePanel.setBackground(Color.DARK_GRAY);
-		//controlPanel.setBackground(Color.GRAY);
 		add(imagePanel, BorderLayout.CENTER);
 		add(infoPanel, BorderLayout.PAGE_END);
 		
-		infoPanel.setBackground(Color.RED);
 		setSize(imagePanel.WIDTH, imagePanel.HEIGHT + 200);
 		setVisible(true);
 		
@@ -44,17 +35,17 @@ public class EyeborgGUI extends JFrame {
 	
 	
 	private JPanel createInfoPanel() {
-		JPanel controlPanel = new JPanel();
+		JPanel infoPanel = new JPanel();
 		
-		controlPanel.setLayout(new BorderLayout());
-
-		JPanel dominantColorPanel = createDominantColorPanel();
-		JPanel subImagePanel = createSubImagePanel();
+		String info = String.format("Drag your mouse along the image to hear its colors.");
+		infoLabel = new JLabel(info);
 		
-		controlPanel.add(dominantColorPanel, BorderLayout.LINE_START);
-		controlPanel.add(subImagePanel, BorderLayout.CENTER);
+		infoLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		infoLabel.setVerticalAlignment(SwingConstants.CENTER);
 		
-		return controlPanel;
+		infoPanel.add(infoLabel);
+		
+		return infoPanel;
 	}
 	
 	// Create dominant color panel and components
@@ -94,6 +85,24 @@ public class EyeborgGUI extends JFrame {
 		
 		subImagePanel.setBackground(Color.DARK_GRAY);
 		return subImagePanel;
+	}
+	
+	public void updateInfo(int r, int g, int b, double frequency) {
+		Color bgColor = new Color(r,g,b);
+		Color textColor;
+		
+		int threshold = 170;
+		if(r < threshold && g < threshold && b < threshold) {
+			  textColor = Color.WHITE;
+		} else {
+			  textColor = Color.BLACK;
+		}
+		
+		infoPanel.setBackground(bgColor);
+		infoLabel.setForeground(textColor);
+		
+		String newInfo = String.format("Red: %03d Green: %03d Blue: %03d %5s Frequency: %03.3f Hz", r, g, b, " ", frequency);
+		infoLabel.setText(newInfo);
 	}
 	
 

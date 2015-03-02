@@ -11,21 +11,37 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import org.jfugue.MicrotoneNotation;
+import org.jfugue.Pattern;
+import org.jfugue.Player;
+
 
 public class ImageLabel extends JLabel implements MouseListener, MouseMotionListener  {
 	
 	private BufferedImage img;
 	private BufferedImage subImg;
+	private SonochromaticPlayer player;
+	private EyeborgGUI parent;
 	
-	public ImageLabel(String pathToImage) {
+	public int currentMouseX;
+	public int currentMouseY;
+	
+	public ImageLabel(String pathToImage, EyeborgGUI parent) {
+		this.parent = parent;
+		
 		img = loadImage("resource/schoolOfAthens.jpg");
 		ImageIcon icon = new ImageIcon(img);
-		
-		this.setPreferredSize(new Dimension(img.getWidth(), img.getHeight()));
 		this.setIcon(icon);
+		this.setPreferredSize(new Dimension(img.getWidth(), img.getHeight()));
+		
 		addMouseListener(this);
 		addMouseMotionListener(this);
 		
+		initializeSoundPlayer();
+	}
+	
+	private void initializeSoundPlayer() {
+		player = new SonochromaticPlayer();
 	}
 	
 	private BufferedImage loadImage(String pathToImage) {
@@ -46,18 +62,36 @@ public class ImageLabel extends JLabel implements MouseListener, MouseMotionList
 	public void mouseDragged(MouseEvent e) {
 		 //System.out.println("Mouse dragged (" + e.getX() + ',' + e.getY() + ')');
 		 
-		 int x = Math.max(e.getX() - 5, 0);
+		 /*int x = Math.max(e.getX() - 5, 0);
 		 int y = Math.max(e.getY() - 5, 0);
 		 
 		 int w = (x + 5) < img.getWidth() ? 5 : img.getWidth() - x;
 		 int h = (y + 5) < img.getHeight() ? 5 : img.getHeight() - x;
 		 
 		 subImg = img.getSubimage(x, y, w, h);
-		 ColorDetector.getDominantColor(subImg);
+		 ColorDetector.getDominantColor(subImg);*/
+		currentMouseX = e.getX();
+		currentMouseY = e.getY();
+		
+		int pixel = img.getRGB(e.getX(), e.getY());
+		int[] rgb = ColorDetector.getRGB(pixel);
+		int hue = ColorDetector.getHue(pixel);
+		double frequency = player.getHueFrequency(hue);
+		
+		System.out.println(rgb[0]);
+		
+		parent.updateInfo(rgb[0], rgb[1], rgb[2], frequency);
+		player.play(hue);
+		
+		//System.out.println("Mouse dragged (" + e.getX() + ',' + e.getY() + ')');
+		System.out.println("Hue: " + hue);
+		
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
+		currentMouseX = e.getX();
+		currentMouseY = e.getY();
 		//System.out.println("Mouse moved (" + e.getX() + ',' + e.getY() + ')');
 	}
 

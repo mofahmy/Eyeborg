@@ -22,14 +22,21 @@ public class SonochromaticPlayer {
 		microtoneMap = new MicrotoneNotation();
 		for (int hue = 0; hue < 360; hue++) {
 			double frequency = minFrequency + (hue * increment);
-			microtoneMap.put(Integer.toString(hue), frequency);
+			microtoneMap.put("M" + Integer.toString(hue), frequency);
 			System.out.println("Addint microtone - Hue: " + hue + " Frequency: " + frequency);
 		}
 	}
 	
 	// Play the frequency associated with a particular hue
 	public void play(int hue) {
-		player.play(microtoneMap.getMusicString(Integer.toString(hue)));
+		//player.play(microtoneMap.getMusicString("M" + Integer.toString(hue)));
+		player.play("I[Warm] " + microtoneMap.getMusicString("M" + Integer.toString(hue))); // Warm, Crystal
+		//player.play("I[Rock_Organ] Db4minHa64d64");
+	}
+	
+	public double getHueFrequency(int hue) {
+		double frequency = minFrequency + (hue * increment);
+		return frequency;
 	}
 	
 	
