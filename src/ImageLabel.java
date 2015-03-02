@@ -26,10 +26,10 @@ public class ImageLabel extends JLabel implements MouseListener, MouseMotionList
 	public int currentMouseX;
 	public int currentMouseY;
 	
-	public ImageLabel(String pathToImage, EyeborgGUI parent) {
+	public ImageLabel(EyeborgGUI parent, String pathToImage) {
 		this.parent = parent;
 		
-		img = loadImage("resource/schoolOfAthens.jpg");
+		img = loadImage(pathToImage);
 		ImageIcon icon = new ImageIcon(img);
 		this.setIcon(icon);
 		this.setPreferredSize(new Dimension(img.getWidth(), img.getHeight()));
@@ -60,16 +60,6 @@ public class ImageLabel extends JLabel implements MouseListener, MouseMotionList
 	
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		 //System.out.println("Mouse dragged (" + e.getX() + ',' + e.getY() + ')');
-		 
-		 /*int x = Math.max(e.getX() - 5, 0);
-		 int y = Math.max(e.getY() - 5, 0);
-		 
-		 int w = (x + 5) < img.getWidth() ? 5 : img.getWidth() - x;
-		 int h = (y + 5) < img.getHeight() ? 5 : img.getHeight() - x;
-		 
-		 subImg = img.getSubimage(x, y, w, h);
-		 ColorDetector.getDominantColor(subImg);*/
 		currentMouseX = e.getX();
 		currentMouseY = e.getY();
 		
@@ -78,49 +68,41 @@ public class ImageLabel extends JLabel implements MouseListener, MouseMotionList
 		int hue = ColorDetector.getHue(pixel);
 		double frequency = player.getHueFrequency(hue);
 		
-		System.out.println(rgb[0]);
-		
 		parent.updateInfo(rgb[0], rgb[1], rgb[2], frequency);
 		player.play(hue);
-		
-		//System.out.println("Mouse dragged (" + e.getX() + ',' + e.getY() + ')');
-		System.out.println("Hue: " + hue);
-		
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		currentMouseX = e.getX();
 		currentMouseY = e.getY();
-		//System.out.println("Mouse moved (" + e.getX() + ',' + e.getY() + ')');
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		System.out.println("Mouse clicked (" + e.getX() + ',' + e.getY() + ')');
-		
+		// Do nothing
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
+		// Do nothing
 		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
+		// Do nothing
 		
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
+		// Do nothing
 		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		System.out.println("Mouse Released (" + e.getX() + ',' + e.getY() + ')');
+		// Do nothing
 	}
 }

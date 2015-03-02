@@ -22,7 +22,7 @@ public class EyeborgGUI extends JFrame {
 		
 		imagePanel.setPreferredSize(new Dimension(1100,700));
 		imagePanel.setLayout(new FlowLayout());
-		imagePanel.add(new ImageLabel("resource/SchoolOfAthens.jpg", this));
+		imagePanel.add(new ImageLabel(this, "resource/SchoolOfAthens.jpg"));
 		
 		add(imagePanel, BorderLayout.CENTER);
 		add(infoPanel, BorderLayout.PAGE_END);
@@ -37,7 +37,7 @@ public class EyeborgGUI extends JFrame {
 	private JPanel createInfoPanel() {
 		JPanel infoPanel = new JPanel();
 		
-		String info = String.format("Drag your mouse along the image to hear its colors.");
+		String info = String.format("Click and drag your mouse along the image to hear its colors.");
 		infoLabel = new JLabel(info);
 		
 		infoLabel.setHorizontalAlignment(SwingConstants.CENTER);
