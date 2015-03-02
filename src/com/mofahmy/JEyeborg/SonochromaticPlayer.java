@@ -1,3 +1,4 @@
+package com.mofahmy.JEyeborg;
 import org.jfugue.MicrotoneNotation;
 import org.jfugue.Player;
 

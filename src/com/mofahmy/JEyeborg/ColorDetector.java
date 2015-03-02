@@ -1,3 +1,4 @@
+package com.mofahmy.JEyeborg;
 import java.awt.Color;
 
 public class ColorDetector {
