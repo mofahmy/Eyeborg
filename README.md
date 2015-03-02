@@ -13,7 +13,7 @@ Dragging the mouse along an image loaded into `JEyeborg` will play the notes ass
 
 The current mapping from color to sound is loosely based on Neil Harbisson's sonochromatic scales [[1]](#links)[[2]](#links).
 
-Every integer hue value on the color wheel is mapped to a frequency in the range near F#4 through F#5.
+Hue values on the color wheel are mapped to frequencies in the range near F#4 through F#5.
 
 Microtone[[4]](#links) sound synthesis is achieved using JFugue [[5]](#links).
 
