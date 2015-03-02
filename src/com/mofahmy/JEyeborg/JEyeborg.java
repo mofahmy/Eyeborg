@@ -1,6 +1,8 @@
+package com.mofahmy.JEyeborg;
 import javax.swing.*;
 
 import java.awt.*;
+import java.io.File;
 
 public class JEyeborg extends JFrame {
 	
@@ -20,9 +22,20 @@ public class JEyeborg extends JFrame {
 		canvasPanel = new JPanel(); // Will hold the primary image
 		infoPanel = createInfoPanel();
 		
-		canvasPanel.setPreferredSize(new Dimension(1100,700));
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+		
+		String fileAbsolutePath = null;
+		int result = fileChooser.showOpenDialog(this);
+		if (result == JFileChooser.APPROVE_OPTION) {
+			 File selectedFile = fileChooser.getSelectedFile();
+			 fileAbsolutePath = selectedFile.getAbsolutePath();
+		} else {
+			System.exit(1);
+		}
+		
 		canvasPanel.setLayout(new FlowLayout());
-		canvasPanel.add(new Canvas(this, "resource/schoolOfAthens.jpg"));
+		canvasPanel.add(new Canvas(this, fileAbsolutePath));
 		
 		add(canvasPanel, BorderLayout.CENTER);
 		add(infoPanel, BorderLayout.PAGE_END);
