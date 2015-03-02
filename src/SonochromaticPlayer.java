@@ -1,5 +1,3 @@
-import java.awt.Color;
-
 import org.jfugue.MicrotoneNotation;
 import org.jfugue.Player;
 
@@ -13,9 +11,6 @@ public class SonochromaticPlayer {
 	
 	private MicrotoneNotation microtoneMap;
 	private Player player;
-	
-	private double[] map; // Map of color hue to audio frequency
-	
 	
 	public SonochromaticPlayer() {
 		player = new Player();
@@ -33,6 +28,7 @@ public class SonochromaticPlayer {
 		player.play("I[Warm] " + microtoneMap.getMusicString("M" + Integer.toString(hue)));
 	}
 	
+	// Returns the frequency associated with a particular hue
 	public double getHueFrequency(int hue) {
 		double frequency = minFrequency + (hue * increment);
 		return frequency;

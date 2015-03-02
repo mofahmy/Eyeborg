@@ -22,7 +22,7 @@ public class EyeborgGUI extends JFrame {
 		
 		imagePanel.setPreferredSize(new Dimension(1100,700));
 		imagePanel.setLayout(new FlowLayout());
-		imagePanel.add(new ImageLabel(this, "resource/SchoolOfAthens.jpg"));
+		imagePanel.add(new ImageLabel(this, "resource/pureSonochromaticScale.png"));
 		
 		add(imagePanel, BorderLayout.CENTER);
 		add(infoPanel, BorderLayout.PAGE_END);
@@ -46,45 +46,6 @@ public class EyeborgGUI extends JFrame {
 		infoPanel.add(infoLabel);
 		
 		return infoPanel;
-	}
-	
-	// Create dominant color panel and components
-	private JPanel createDominantColorPanel() {
-		JPanel dominantColorPanel = new JPanel();
-		dominantColorPanel.setLayout(new BoxLayout(dominantColorPanel, BoxLayout.PAGE_AXIS));
-		
-		JLabel dominantColorTitleLabel = new JLabel("Dominant Color");
-		JLabel dominantColorLabel = new JLabel();
-		
-		dominantColorLabel.setBounds(10, 10, 100, 100);
-		
-		dominantColorLabel.setMinimumSize(new Dimension(100, 100));
-		dominantColorLabel.setPreferredSize(new Dimension(100, 100));
-		dominantColorLabel.setMaximumSize(new Dimension(100, 100));
-		
-		dominantColorPanel.add(dominantColorTitleLabel);
-		dominantColorPanel.add(dominantColorLabel);
-		
-		dominantColorPanel.setBackground(Color.GRAY);
-		return dominantColorPanel;
-	}
-	
-	private JPanel createSubImagePanel() {
-		JPanel subImagePanel = new JPanel();
-		subImagePanel.setLayout(new BoxLayout(subImagePanel, BoxLayout.PAGE_AXIS));
-		
-		JLabel subImageTitleLabel = new JLabel("Subimage");
-		JLabel subImageLabel = new JLabel();
-		
-		subImageLabel.setMinimumSize(new Dimension(100, 100));
-		subImageLabel.setPreferredSize(new Dimension(100, 100));
-		subImageLabel.setMaximumSize(new Dimension(100, 100));
-		
-		subImagePanel.add(subImageTitleLabel);
-		subImagePanel.add(subImageLabel);
-		
-		subImagePanel.setBackground(Color.DARK_GRAY);
-		return subImagePanel;
 	}
 	
 	public void updateInfo(int r, int g, int b, double frequency) {

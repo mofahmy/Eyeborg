@@ -1,4 +1,3 @@
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -11,10 +10,6 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import org.jfugue.MicrotoneNotation;
-import org.jfugue.Pattern;
-import org.jfugue.Player;
-
 
 public class ImageLabel extends JLabel implements MouseListener, MouseMotionListener  {
 	
@@ -22,9 +17,6 @@ public class ImageLabel extends JLabel implements MouseListener, MouseMotionList
 	private BufferedImage subImg;
 	private SonochromaticPlayer player;
 	private EyeborgGUI parent;
-	
-	public int currentMouseX;
-	public int currentMouseY;
 	
 	public ImageLabel(EyeborgGUI parent, String pathToImage) {
 		this.parent = parent;
@@ -60,9 +52,6 @@ public class ImageLabel extends JLabel implements MouseListener, MouseMotionList
 	
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		currentMouseX = e.getX();
-		currentMouseY = e.getY();
-		
 		int pixel = img.getRGB(e.getX(), e.getY());
 		int[] rgb = ColorDetector.getRGB(pixel);
 		int hue = ColorDetector.getHue(pixel);
@@ -74,8 +63,7 @@ public class ImageLabel extends JLabel implements MouseListener, MouseMotionList
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		currentMouseX = e.getX();
-		currentMouseY = e.getY();
+		// Do nothing
 	}
 
 	@Override
