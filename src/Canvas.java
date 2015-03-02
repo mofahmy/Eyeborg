@@ -11,17 +11,20 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 
-public class ImageLabel extends JLabel implements MouseListener, MouseMotionListener  {
+public class Canvas extends JLabel implements MouseListener, MouseMotionListener  {
 	
 	private BufferedImage img;
 	private BufferedImage subImg;
-	private SonochromaticPlayer player;
-	private EyeborgGUI parent;
 	
-	public ImageLabel(EyeborgGUI parent, String pathToImage) {
+	private SonochromaticPlayer player;
+	private JEyeborg parent;
+	
+	public Canvas(JEyeborg parent, String pathToImage) {
 		this.parent = parent;
 		
 		img = loadImage(pathToImage);
+		if (img == null) { return; }
+		
 		ImageIcon icon = new ImageIcon(img);
 		this.setIcon(icon);
 		this.setPreferredSize(new Dimension(img.getWidth(), img.getHeight()));
@@ -41,6 +44,8 @@ public class ImageLabel extends JLabel implements MouseListener, MouseMotionList
 		try {
 		    img = ImageIO.read(new File(pathToImage));
 		} catch (IOException e) {
+			parent.setInfoError("Failed to load specified image...");
+			return null;
 		}
 		
 		return img;
