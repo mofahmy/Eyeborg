@@ -1,4 +1,5 @@
 package com.mofahmy.JEyeborg;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -17,6 +18,8 @@ public class Canvas extends JLabel implements MouseListener, MouseMotionListener
 	private BufferedImage img;
 	private BufferedImage subImg;
 	
+	private Cursor cursor;
+	
 	private SonochromaticPlayer player;
 	private JEyeborg parent;
 	
@@ -30,6 +33,7 @@ public class Canvas extends JLabel implements MouseListener, MouseMotionListener
 		this.setIcon(icon);
 		this.setPreferredSize(new Dimension(img.getWidth(), img.getHeight()));
 		
+		setCanvasCursor();
 		addMouseListener(this);
 		addMouseMotionListener(this);
 		
@@ -50,6 +54,18 @@ public class Canvas extends JLabel implements MouseListener, MouseMotionListener
 		}
 		
 		return img;
+	}
+	
+	private void setCanvasCursor() {
+		String OS = System.getProperty("os.name").toLowerCase();
+		
+		if (OS.indexOf("win") > - 1) {
+			System.out.println("Windows");
+			cursor = new Cursor(Cursor.WAIT_CURSOR);
+		} else {
+			System.out.println("NOT Windows");
+			cursor = Cursor.getDefaultCursor();
+		}
 	}
 	
 	public BufferedImage getCurrentSubImage() {
@@ -79,13 +95,13 @@ public class Canvas extends JLabel implements MouseListener, MouseMotionListener
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// Do nothing
+		e.getComponent().setCursor(cursor);
 		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// Do nothing
+		e.getComponent().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		
 	}
 
