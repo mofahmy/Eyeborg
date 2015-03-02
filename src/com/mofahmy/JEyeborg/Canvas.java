@@ -101,7 +101,7 @@ public class Canvas extends JLabel implements MouseListener, MouseMotionListener
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		e.getComponent().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		e.getComponent().setCursor(new Cursor(Cursor.HAND_CURSOR));
 		
 	}
 
