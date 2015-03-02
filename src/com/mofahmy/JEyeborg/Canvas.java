@@ -1,3 +1,4 @@
+package com.mofahmy.JEyeborg;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -44,7 +45,7 @@ public class Canvas extends JLabel implements MouseListener, MouseMotionListener
 		try {
 		    img = ImageIO.read(new File(pathToImage));
 		} catch (IOException e) {
-			parent.setInfoError("Failed to load specified image...");
+			parent.setInfoError("Failed to load specified image: " + pathToImage);
 			return null;
 		}
 		
