@@ -2,37 +2,36 @@ import javax.swing.*;
 
 import java.awt.*;
 
-public class JEyeborgGUI extends JFrame {
+public class JEyeborg extends JFrame {
 	
-	private JPanel imagePanel;
+	private JPanel canvasPanel;
 	private JPanel infoPanel;
 	private JLabel infoLabel;
 	
-	public JEyeborgGUI() {
-		createGUI();
+	public static void main(String[] args) {
+		new JEyeborg();
 	}
 	
-	private void createGUI() {
-		setTitle("Eyeborg");
+	public JEyeborg() {
+		setTitle("JEyeborg");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
 		
-		imagePanel = new JPanel(); // Will hold the primary image
+		canvasPanel = new JPanel(); // Will hold the primary image
 		infoPanel = createInfoPanel();
 		
-		imagePanel.setPreferredSize(new Dimension(1100,700));
-		imagePanel.setLayout(new FlowLayout());
-		imagePanel.add(new ImageLabel(this, "resource/schoolOfAthens.jpg"));
+		canvasPanel.setPreferredSize(new Dimension(1100,700));
+		canvasPanel.setLayout(new FlowLayout());
+		canvasPanel.add(new Canvas(this, "resource/schoolOfAthens.jpg"));
 		
-		add(imagePanel, BorderLayout.CENTER);
+		add(canvasPanel, BorderLayout.CENTER);
 		add(infoPanel, BorderLayout.PAGE_END);
 		
-		setSize(imagePanel.WIDTH, imagePanel.HEIGHT + 200);
+		setSize(canvasPanel.WIDTH, canvasPanel.HEIGHT + 200);
 		setVisible(true);
 		
 		pack();
 	}
-	
 	
 	private JPanel createInfoPanel() {
 		JPanel infoPanel = new JPanel();
@@ -65,6 +64,10 @@ public class JEyeborgGUI extends JFrame {
 		
 		String newInfo = String.format("Red: %03d Green: %03d Blue: %03d %5s Frequency: %03.3f Hz", r, g, b, " ", frequency);
 		infoLabel.setText(newInfo);
+	}
+	
+	public void setInfoError(String error) {
+		infoLabel.setText("ERROR: " + error);
 	}
 	
 
