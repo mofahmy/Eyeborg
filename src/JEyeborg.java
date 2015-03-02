@@ -2,13 +2,13 @@ import javax.swing.*;
 
 import java.awt.*;
 
-public class EyeborgGUI extends JFrame {
+public class JEyeborgGUI extends JFrame {
 	
 	private JPanel imagePanel;
 	private JPanel infoPanel;
 	private JLabel infoLabel;
 	
-	public EyeborgGUI() {
+	public JEyeborgGUI() {
 		createGUI();
 	}
 	
@@ -22,7 +22,7 @@ public class EyeborgGUI extends JFrame {
 		
 		imagePanel.setPreferredSize(new Dimension(1100,700));
 		imagePanel.setLayout(new FlowLayout());
-		imagePanel.add(new ImageLabel(this, "resource/pureSonochromaticScale.png"));
+		imagePanel.add(new ImageLabel(this, "resource/schoolOfAthens.jpg"));
 		
 		add(imagePanel, BorderLayout.CENTER);
 		add(infoPanel, BorderLayout.PAGE_END);
@@ -47,6 +47,7 @@ public class EyeborgGUI extends JFrame {
 		
 		return infoPanel;
 	}
+	
 	
 	public void updateInfo(int r, int g, int b, double frequency) {
 		Color bgColor = new Color(r,g,b);
