@@ -7,7 +7,7 @@ Run the included `JEyeborg.jar` or compile from source.
 
 Choose an image using the file browser dialog.
 
-Dragging the mouse along an image loaded into `JEyeborg` will play the notes associated with image pixels traversed by the cursor.
+Holding down the left mouse button and dragging the cursor along an image loaded into `JEyeborg` will play the notes associated with image pixels traversed by the cursor.
 
 ## Sonochromatic Map
 
